@@ -5,12 +5,10 @@ import com.feue.ml.dto.RegisterDTO;
 import com.feue.ml.entity.User;
 import com.feue.ml.exception.ParameterException;
 import com.feue.ml.service.UserService;
+import com.feue.ml.vo.UserVO;
 import com.feue.ml.vo.UnifyResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,25 +22,30 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("get/by/username/{username}")
+    @RequestMapping(method = RequestMethod.GET, value = "get/by/username/{username}")
     public UnifyResponse<List<User>> getByUserName(@PathVariable String username) {
         List<User> userList = userService.findByUsername(username);
         return new UnifyResponse<>(userList, "查询成功");
     }
 
-    @RequestMapping("register")
-    public UnifyResponse<Long> register(@RequestBody RegisterDTO dto) {
+    @RequestMapping(method = RequestMethod.POST, value = "register")
+    public UnifyResponse<UserVO> register(@RequestBody RegisterDTO dto) {
         User user = userService.findByPhone(dto.getPhone());
-        Long id = null;
         if (user == null) {
-            id = userService.register(dto);
+            user = userService.register(dto);
         } else {
             if (!dto.getPassword().equals(user.getPassword())) {
                 throw new ParameterException(20003);
             }
-            id = user.getId();
         }
-        return new UnifyResponse<>(id, "登录成功");
+        UserVO vo = new UserVO(user);
+        return new UnifyResponse<>(vo, "登录成功");
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "delete/by/id/{id}")
+    public UnifyResponse delete(@PathVariable Long id) {
+        userService.delete(id);
+        return new UnifyResponse("删除成功");
     }
 
     @Admin

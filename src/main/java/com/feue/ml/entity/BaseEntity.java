@@ -1,5 +1,6 @@
 package com.feue.ml.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -18,8 +19,11 @@ import java.util.Date;
 @MappedSuperclass
 public class BaseEntity {
     @Column(insertable = false, updatable = false)
+    @JsonIgnore
     private Date createTime;
     @Column(insertable = false, updatable = false)
+    @JsonIgnore
     private Date updateTime;
+    @JsonIgnore
     private Date deleteTime;
 }

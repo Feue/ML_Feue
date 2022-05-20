@@ -25,6 +25,10 @@ public class PermissionInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        String requestUrl = request.getRequestURI();
+        if ("/user/register".equals(requestUrl)) {
+            return true;
+        }
         Optional<Admin> admin = getAdmin(handler);
         String idString = request.getHeader("Authorization");
         if (idString == null || !idString.matches("[0-9]+")) {

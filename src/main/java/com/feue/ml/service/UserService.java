@@ -15,7 +15,9 @@ public interface UserService {
 
     User findByPhone(String phone);
 
-    Long register(RegisterDTO dto);
-
     Optional<User> findById(Long uid);
+
+    User register(RegisterDTO dto);
+
+    void delete(Long id);
 }

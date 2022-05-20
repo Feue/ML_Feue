@@ -1,6 +1,7 @@
 package com.feue.ml.entity;
 
 import lombok.*;
+import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
@@ -17,6 +18,7 @@ import javax.persistence.*;
 @Entity(name = "User")
 @Table(name = "user")
 @Where(clause = "delete_time is null")
+@DynamicInsert
 public class User extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -7,6 +7,7 @@ import com.feue.ml.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,11 +36,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Long register(RegisterDTO dto) {
+    public User register(RegisterDTO dto) {
         User user = User.builder()
                 .phone(dto.getPhone())
                 .password(dto.getPassword())
                 .build();
-        return userRepository.save(user).getId();
+        return userRepository.save(user);
+    }
+
+    @Override
+    public void delete(Long id) {
+        Date now = new Date();
+        userRepository.deleteById(id, now);
     }
 }
