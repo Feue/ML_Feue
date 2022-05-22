@@ -19,7 +19,7 @@ public class ChapterController {
     @Autowired
     private ChapterService chapterService;
 
-    @RequestMapping(method = RequestMethod.GET, value = "get/by/course_id/{course_id}")
+    @RequestMapping(method = RequestMethod.GET, value = "course_id/{course_id}")
     public UnifyResponse<List<Chapter>> getByCourseId(@PathVariable(name = "course_id") Long courseId) {
         List<Chapter> chapterList = chapterService.getByCourseId(courseId);
         return new UnifyResponse<>(chapterList, "章节查询成功");

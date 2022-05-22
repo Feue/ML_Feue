@@ -7,8 +7,10 @@ import com.feue.ml.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Feue
@@ -31,6 +33,15 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public List<Category> getAll() {
         return categoryRepository.findAll();
+    }
+
+    @Override
+    public List<String> findAllCategoryNameByIds(List<Long> ids) {
+        List<Category> categoryList = new ArrayList<>();
+        for (Long id : ids) {
+            categoryList.add(categoryRepository.getById(id));
+        }
+        return categoryList.stream().map(Category::getName).collect(Collectors.toList());
     }
 
     @Override

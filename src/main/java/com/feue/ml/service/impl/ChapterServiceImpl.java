@@ -38,6 +38,11 @@ public class ChapterServiceImpl implements ChapterService {
     }
 
     @Override
+    public String getChapterNameById(Long chapterId) {
+        return chapterRepository.getById(chapterId).getName();
+    }
+
+    @Override
     public void delete(Long id) {
         Chapter chapter = chapterRepository.getById(id);
         chapter.setDeleteTime(new Date());

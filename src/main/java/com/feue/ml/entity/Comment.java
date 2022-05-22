@@ -17,7 +17,7 @@ import java.util.Objects;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "comment")
+@Entity
 @Table(name = "comment")
 @Where(clause = "delete_time is null")
 public class Comment extends BaseEntity {

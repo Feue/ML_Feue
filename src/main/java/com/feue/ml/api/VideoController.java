@@ -2,8 +2,10 @@ package com.feue.ml.api;
 
 import com.feue.ml.dto.VideoDTO;
 import com.feue.ml.entity.Video;
+import com.feue.ml.service.ChapterService;
 import com.feue.ml.service.VideoService;
 import com.feue.ml.vo.UnifyResponse;
+import com.feue.ml.vo.VideoVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -11,7 +13,9 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.InputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Feue
@@ -22,11 +26,15 @@ import java.util.List;
 public class VideoController {
     @Autowired
     private VideoService videoService;
+    @Autowired
+    private ChapterService chapterService;
 
-    @RequestMapping(method = RequestMethod.GET, value = "get/by/chapter_id/{chapter_id}")
-    public UnifyResponse<List<Video>> getByChapterId(@PathVariable(name = "chapter_id") Long chapterId) {
+    @RequestMapping(method = RequestMethod.GET, value = "chapter_id/{chapter_id}")
+    public UnifyResponse<List<VideoVO>> getByChapterId(@PathVariable(name = "chapter_id") Long chapterId) {
         List<Video> videoList = videoService.getByChapterId(chapterId);
-        return new UnifyResponse<>(videoList, "视频查询成功");
+        String chapterName = chapterService.getChapterNameById(chapterId);
+        List<VideoVO> vos = videoList.stream().map(video -> new VideoVO(video, chapterName)).collect(Collectors.toList());
+        return new UnifyResponse<>(vos, "视频查询成功");
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "add")

@@ -1,30 +1,25 @@
 package com.feue.ml.entity;
 
 import lombok.*;
-import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
-import java.util.Date;
 import java.util.Objects;
 
 /**
  * @author Feue
- * @create 2022-04-24 19:13
+ * @create 2022-05-20 20:15
  */
-@Builder
+@Entity
+@Table(name = "course_star")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "notice")
-@Where(clause = "delete_time is null")
-public class Notice extends BaseEntity {
+@Builder
+public class CourseStar extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private String content;
     private Long userId;
+    private Long courseId;
 }

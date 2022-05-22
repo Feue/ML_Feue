@@ -17,7 +17,7 @@ import java.util.Objects;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "course")
+@Entity
 @Table(name = "course")
 @Where(clause = "delete_time is null")
 public class Course extends BaseEntity {
@@ -30,4 +30,5 @@ public class Course extends BaseEntity {
     private Date startTime;
     private Date endTime;
     private Long categoryId;
+    private String coverImage;
 }

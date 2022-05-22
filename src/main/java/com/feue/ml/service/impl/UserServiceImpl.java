@@ -7,9 +7,11 @@ import com.feue.ml.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * @author Feue
@@ -33,6 +35,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public Optional<User> findById(Long uid) {
         return userRepository.findById(uid);
+    }
+
+    @Override
+    public List<String> findAllTeacherNameByIds(List<Long> ids) {
+        List<User> userList = new ArrayList<>();
+        for (Long id : ids) {
+            userList.add(userRepository.getById(id));
+        }
+        return userList.stream().map(User::getName).collect(Collectors.toList());
     }
 
     @Override

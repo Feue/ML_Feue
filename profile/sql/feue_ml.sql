@@ -122,3 +122,18 @@ create table notice
   auto_increment = 1
   default charset = utf8mb4
   collate = utf8mb4_general_ci;
+
+drop table if exists course_star;
+create table course_star
+(
+    id        int unsigned not null auto_increment,
+    user_id   int unsigned not null,
+    course_id int unsigned not null,
+    create_time datetime(3)  not null default current_timestamp(3),
+    update_time datetime(3)  not null default current_timestamp(3) on update current_timestamp(3),
+    delete_time datetime(3)  null     default null,
+    primary key (id)
+) engine = InnoDB
+  auto_increment = 1
+  default charset = utf8mb4
+  collate = utf8mb4_general_ci;

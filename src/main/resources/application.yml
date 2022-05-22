@@ -12,3 +12,5 @@ spring:
 upload:
   file:
     path: profile/upload
+  images:
+    path: profile/upload/images

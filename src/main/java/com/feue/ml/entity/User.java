@@ -15,7 +15,7 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "User")
+@Entity
 @Table(name = "user")
 @Where(clause = "delete_time is null")
 @DynamicInsert

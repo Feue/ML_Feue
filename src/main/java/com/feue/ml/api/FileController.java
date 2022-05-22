@@ -25,8 +25,11 @@ import java.nio.file.StandardCopyOption;
 @RestController
 @RequestMapping("file")
 public class FileController {
+
     @Value("${upload.file.path}")
     private String uploadPathStr;
+    @Value("${upload.images.path}")
+    private String uploadImagePathStr;
 
     @RequestMapping("upload")
     public UnifyResponse<Boolean> upload(@RequestParam MultipartFile file,
@@ -61,6 +64,15 @@ public class FileController {
                     .body(new FileSystemResource(file));
         } else {
             return null;
+        }
+    }
+
+    public Path getPath(int type) {
+        switch (type) {
+            case 0: return Paths.get(uploadPathStr);
+            case 1: return Paths.get(uploadImagePathStr);
+            case 2: return null;
+            default: return null;
         }
     }
 }

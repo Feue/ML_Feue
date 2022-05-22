@@ -16,7 +16,7 @@ import java.util.Objects;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "category")
+@Entity
 @Table(name = "category")
 @Where(clause = "delete_time is null")
 public class Category extends BaseEntity {

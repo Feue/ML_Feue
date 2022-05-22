@@ -15,4 +15,8 @@ public interface CourseService {
     void add(CourseDTO dto);
 
     void delete(Long id);
+
+    List<Course> get();
+
+    List<Course> getByStudentId(Long studentId);
 }

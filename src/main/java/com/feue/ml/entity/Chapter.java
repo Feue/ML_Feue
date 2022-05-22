@@ -17,7 +17,7 @@ import java.util.Objects;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "chapter")
+@Entity
 @Table(name = "chapter")
 @Where(clause = "delete_time is null")
 public class Chapter extends BaseEntity {

@@ -2,6 +2,7 @@ package com.feue.ml.repository;
 
 import com.feue.ml.entity.Course;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 

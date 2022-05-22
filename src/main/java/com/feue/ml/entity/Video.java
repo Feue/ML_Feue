@@ -16,7 +16,7 @@ import java.util.Objects;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "video")
+@Entity
 @Table(name = "video")
 @Where(clause = "delete_time is null")
 public class Video extends BaseEntity {

@@ -15,4 +15,6 @@ public interface CategoryService {
     List<Category> getAll();
 
     void delete(Long id);
+
+    List<String> findAllCategoryNameByIds(List<Long> categoryIds);
 }

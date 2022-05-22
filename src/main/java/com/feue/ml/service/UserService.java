@@ -20,4 +20,6 @@ public interface UserService {
     User register(RegisterDTO dto);
 
     void delete(Long id);
+
+    List<String> findAllTeacherNameByIds(List<Long> ids);
 }

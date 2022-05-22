@@ -15,4 +15,6 @@ public interface ChapterService {
     List<Chapter> getByCourseId(Long courseId);
 
     void delete(Long id);
+
+    String getChapterNameById(Long chapterId);
 }
